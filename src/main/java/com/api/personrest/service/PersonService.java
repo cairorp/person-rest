@@ -7,13 +7,13 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface PersonService {
-    ResponseEntity<List<Person>> listPersons();
+    ResponseEntity<List<Person>> findAll();
 
     ResponseEntity<Person> findById(Integer id);
 
-    ResponseEntity<Person> save(PersonDTO personDTO);
+    ResponseEntity<Void> save(PersonDTO personDTO);
 
-    ResponseEntity<Person> update(Integer id, PersonDTO personDTO);
+    ResponseEntity<Void> update(Integer id, PersonDTO personDTO);
 
     ResponseEntity<Void> delete(Integer id);
 }
