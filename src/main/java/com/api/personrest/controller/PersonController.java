@@ -4,6 +4,7 @@ import com.api.personrest.dto.PersonDTO;
 import com.api.personrest.model.Person;
 import com.api.personrest.service.PersonService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +27,8 @@ public class PersonController {
     }
 
     @GetMapping("/listarPessoas")
-    public ResponseEntity<List<Person>> listAll() {
-        return personService.listPersons();
+    public ResponseEntity<List<Person>> findAll() {
+        return personService.findAll();
     }
 
     @GetMapping("/buscarPorId/{id}")
@@ -36,12 +37,12 @@ public class PersonController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Person> save(@RequestBody PersonDTO personDTO) {
+    public ResponseEntity<Void> save(@RequestBody PersonDTO personDTO) {
         return personService.save(personDTO);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Person> update(@PathVariable Integer id,
+    public ResponseEntity<Void> update(@PathVariable Integer id,
                                          @RequestBody PersonDTO personDTO) {
         return personService.update(id, personDTO);
     }
