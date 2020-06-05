@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
@@ -66,7 +65,7 @@ class PersonControllerUnitTest {
     @Test
     public void saveSuccess() {
         Person person = mountPerson("Junior Pereira", "79469056027", new Date());
-        PersonDTO personDTO = mountPersonDTO(person.getName(),person.getDocument(),person.getBirthDate());
+        PersonDTO personDTO = mountPersonDTO(person.getName(), person.getDocument(), person.getBirthDate());
 
         doReturn(ResponseEntity.status(HttpStatus.CREATED).build()).when(personService).save(personDTO);
 
@@ -78,7 +77,7 @@ class PersonControllerUnitTest {
     @Test
     public void validUpdate() {
         Person person = mountPerson("Angela Pereira", "79469056027", new Date());
-        PersonDTO personDTO = mountPersonDTO(person.getName(),person.getDocument(),person.getBirthDate());
+        PersonDTO personDTO = mountPersonDTO(person.getName(), person.getDocument(), person.getBirthDate());
 
         doReturn(ResponseEntity.ok().build()).when(personService).update(1, personDTO);
 
@@ -108,7 +107,7 @@ class PersonControllerUnitTest {
         return person;
     }
 
-    private PersonDTO mountPersonDTO(String name, String document, Date birthDate){
+    private PersonDTO mountPersonDTO(String name, String document, Date birthDate) {
 
         PersonDTO personDTO = new PersonDTO();
         personDTO.setName(name);
