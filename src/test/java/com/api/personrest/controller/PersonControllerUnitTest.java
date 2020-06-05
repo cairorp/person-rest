@@ -39,7 +39,7 @@ class PersonControllerUnitTest {
         doReturn(ResponseEntity.ok().body(persons)).when(personService).findAll();
         personController = new PersonController(personService);
 
-        assertEquals(persons, personController.listAll().getBody());
+        assertEquals(persons, personController.findAll().getBody());
     }
 
     @Test
@@ -49,7 +49,7 @@ class PersonControllerUnitTest {
         doReturn(ResponseEntity.ok().body(persons)).when(personService).findAll();
         personController = new PersonController(personService);
 
-        assertEquals(persons, personController.listAll().getBody());
+        assertEquals(persons, personController.findAll().getBody());
     }
 
 
