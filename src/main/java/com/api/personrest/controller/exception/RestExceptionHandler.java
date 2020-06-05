@@ -2,8 +2,6 @@ package com.api.personrest.controller.exception;
 
 import com.api.personrest.dto.MessageDTO;
 import com.api.personrest.exception.PersonException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus
     @ExceptionHandler(value = {PersonException.class})
     private ResponseEntity<Object> personException(PersonException ex,
-                                                     WebRequest request) {
+                                                   WebRequest request) {
 
         return handleExceptionInternal(ex,
                 mountMessage(ex),
