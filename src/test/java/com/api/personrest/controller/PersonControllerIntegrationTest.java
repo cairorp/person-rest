@@ -96,7 +96,7 @@ public class PersonControllerIntegrationTest {
 
     @Test
     public void updateNameAndBirthDatePersonInvalid() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/persons/update/{id}", 1)
+        mockMvc.perform(MockMvcRequestBuilders.put("/persons/update/{id}", 2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{" +
                         "\"name\" : \"\"," +
@@ -108,7 +108,7 @@ public class PersonControllerIntegrationTest {
 
     @Test
     public void updateDocumentAndBirthDatePersonInvalid() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/persons/update/{id}", 1)
+        mockMvc.perform(MockMvcRequestBuilders.put("/persons/update/{id}", 2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{" +
                         "\"name\" : \"Jorge Pereira\"," +
@@ -127,7 +127,7 @@ public class PersonControllerIntegrationTest {
 
     @Test
     public void deletePersonExisting() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/persons/delete/{id}", 1)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/persons/delete/{id}", 2)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
