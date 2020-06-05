@@ -44,7 +44,7 @@ public class PersonServiceImpl implements PersonService {
 
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (ConstraintViolationException | IllegalArgumentException ex) {
-            throw new PersonException("Erro ao gravar dados de pessoa. ", ex);
+            throw new PersonException("Erro ao gravar dados de pessoa.", ex);
         }
     }
 
@@ -58,7 +58,7 @@ public class PersonServiceImpl implements PersonService {
 
             return ResponseEntity.ok().build();
         } catch (ConstraintViolationException | IllegalArgumentException ex) {
-            throw new PersonException("Erro ao atualizar dados de pessoa. ");
+            throw new PersonException("Erro ao atualizar dados de pessoa.");
         }
     }
 
@@ -71,7 +71,7 @@ public class PersonServiceImpl implements PersonService {
 
             return ResponseEntity.noContent().build();
 
-        } catch (ConstraintViolationException | IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             throw new PersonException("Não foi possivel deletar a pessoa de ID: " + id);
         }
     }
