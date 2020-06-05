@@ -5,6 +5,8 @@ import com.api.personrest.exception.PersonException;
 import com.api.personrest.model.Person;
 import com.api.personrest.repository.PersonRepository;
 import com.api.personrest.service.PersonService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -75,6 +77,11 @@ public class PersonServiceImpl implements PersonService {
         } catch (IllegalArgumentException ex) {
             throw new PersonException("Não foi possivel deletar a pessoa de ID: " + id);
         }
+    }
+
+    @Override
+    public ResponseEntity<Page<Person>> findAll(Integer page, Integer size) {
+        return ResponseEntity.ok().body(personRepository.findAll(PageRequest.of(page, size)));
     }
 
 }

@@ -5,6 +5,7 @@ import com.api.personrest.model.Person;
 import com.api.personrest.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,6 +35,14 @@ public class PersonController {
     public ResponseEntity<List<Person>> findAll() {
         return personService.findAll();
     }
+
+    @ApiOperation("Lista todas as pessoas registradas de forma paginada.")
+    @GetMapping("/listAllPaginated")
+    public ResponseEntity<Page<Person>> findAll(@RequestParam Integer page,
+                                                @RequestParam Integer size) {
+        return personService.findAll(page, size);
+    }
+
 
     @ApiOperation("Busca uma pessoa a partir do ID.")
     @GetMapping("/findById/{id}")

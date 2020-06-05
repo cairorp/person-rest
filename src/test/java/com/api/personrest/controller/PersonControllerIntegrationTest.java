@@ -24,6 +24,15 @@ public class PersonControllerIntegrationTest {
     }
 
     @Test
+    public void findAllPaginated() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/persons/listAllPaginated")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("page", "1")
+                .param("size", "5"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
     public void findByIdExisting() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/persons/findById/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
