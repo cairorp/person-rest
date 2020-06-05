@@ -34,7 +34,7 @@ public class PersonServiceImpl implements PersonService {
         Optional<Person> person = personRepository.findById(id);
 
         return ResponseEntity.ok(person.orElseThrow(() ->
-                new PersonException("Pessoa não cadastrada! ")));
+                new PersonException("Pessoa não cadastrada!")));
     }
 
     @Override
