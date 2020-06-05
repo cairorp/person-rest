@@ -6,6 +6,9 @@ import com.api.personrest.service.PersonService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -42,6 +45,19 @@ class PersonControllerUnitTest {
     }
 
     @Test
+    public void findAllPaginated() {
+        List<Person> persons = new ArrayList<>();
+        persons.add(mountPerson("Cairo Pereira", "12345678910", new Date()));
+        persons.add(mountPerson("Cairo Pereira", "12345678910", new Date()));
+        persons.add(mountPerson("Cairo Pereira", "12345678910", new Date()));
+        Page<Person> p = new PageImpl<>(persons, PageRequest.of(0, 5), 3);
+        doReturn(ResponseEntity.ok().body(p)).when(personService).findAll(0, 5);
+        personController = new PersonController(personService);
+
+        assertEquals(ResponseEntity.ok(p), personController.findAll(0, 5));
+    }
+
+    @Test
     public void findAllEmpty() {
         List<Person> persons = new ArrayList<>();
 
@@ -49,6 +65,16 @@ class PersonControllerUnitTest {
         personController = new PersonController(personService);
 
         assertEquals(persons, personController.findAll().getBody());
+    }
+
+    @Test
+    public void findAllPaginatedEmpty() {
+        List<Person> persons = new ArrayList<>();
+        Page<Person> p = new PageImpl<>(persons, PageRequest.of(0, 5), 0);
+        doReturn(ResponseEntity.ok().body(p)).when(personService).findAll(0, 5);
+        personController = new PersonController(personService);
+
+        assertEquals(ResponseEntity.ok(p), personController.findAll(0, 5));
     }
 
 
@@ -61,6 +87,7 @@ class PersonControllerUnitTest {
 
         assertEquals(person, personController.findById(1).getBody());
     }
+
 
     @Test
     public void saveSuccess() {
