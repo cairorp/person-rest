@@ -29,32 +29,32 @@ public class PersonController {
     }
 
     @ApiOperation("Lista todas as pessoas registradas.")
-    @GetMapping("/listarPessoas")
+    @GetMapping("/listAll")
     public ResponseEntity<List<Person>> findAll() {
         return personService.findAll();
     }
 
     @ApiOperation("Busca uma pessoa a partir do ID.")
-    @GetMapping("/buscarPorId/{id}")
+    @GetMapping("/findById/{id}")
     public ResponseEntity<Person> findById(@PathVariable Integer id) {
         return personService.findById(id);
     }
 
     @ApiOperation("Grava os dados de uma pessoa.")
-    @PostMapping("/salvar")
+    @PostMapping("/save")
     public ResponseEntity<Void> save(@RequestBody PersonDTO personDTO) {
         return personService.save(personDTO);
     }
 
     @ApiOperation("Atualiza dados de uma pessoa.")
-    @PutMapping("/atualizar/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@PathVariable Integer id,
                                        @RequestBody PersonDTO personDTO) {
         return personService.update(id, personDTO);
     }
 
     @ApiOperation("Exclui os dados de uma pessoa a partir do ID")
-    @DeleteMapping("/excluir/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         return personService.delete(id);
     }
