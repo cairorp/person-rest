@@ -3,8 +3,9 @@ package com.api.personrest.controller;
 import com.api.personrest.dto.PersonDTO;
 import com.api.personrest.model.Person;
 import com.api.personrest.service.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Api(description = "Controller reponsavel por manter a entidade Pessoa.")
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
@@ -26,28 +28,33 @@ public class PersonController {
         this.personService = personService;
     }
 
+    @ApiOperation("Lista todas as pessoas registradas.")
     @GetMapping("/listarPessoas")
     public ResponseEntity<List<Person>> findAll() {
         return personService.findAll();
     }
 
+    @ApiOperation("Busca uma pessoa a partir do ID.")
     @GetMapping("/buscarPorId/{id}")
     public ResponseEntity<Person> findById(@PathVariable Integer id) {
         return personService.findById(id);
     }
 
-    @PostMapping("/save")
+    @ApiOperation("Grava os dados de uma pessoa.")
+    @PostMapping("/salvar")
     public ResponseEntity<Void> save(@RequestBody PersonDTO personDTO) {
         return personService.save(personDTO);
     }
 
-    @PutMapping("/update/{id}")
+    @ApiOperation("Atualiza dados de uma pessoa.")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Void> update(@PathVariable Integer id,
-                                         @RequestBody PersonDTO personDTO) {
+                                       @RequestBody PersonDTO personDTO) {
         return personService.update(id, personDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @ApiOperation("Exclui os dados de uma pessoa a partir do ID")
+    @DeleteMapping("/excluir/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         return personService.delete(id);
     }

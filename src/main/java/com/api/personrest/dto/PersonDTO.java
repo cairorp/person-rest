@@ -1,6 +1,7 @@
 package com.api.personrest.dto;
 
 import com.api.personrest.model.Person;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Setter;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
 public class PersonDTO {
     private String name;
     private String document;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     public Person convertToPerson() {
