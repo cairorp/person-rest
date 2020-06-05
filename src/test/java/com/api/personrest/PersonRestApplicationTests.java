@@ -8,6 +8,7 @@ class PersonRestApplicationTests {
 
     @Test
     void contextLoads() {
+        PersonRestApplication.main(new String[] {});
     }
 
 }

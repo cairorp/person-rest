@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.util.Date;
 
+import static com.api.personrest.util.DocumentUtils.unmaskDocument;
+
 @Setter
 public class PersonDTO {
     private String name;
@@ -16,7 +18,7 @@ public class PersonDTO {
     public Person convertToPerson() {
         Person person = new Person();
         person.setName(this.name);
-        person.setDocument(this.document);
+        person.setDocument(unmaskDocument(this.document));
         person.setBirthDate(this.birthDate);
 
         return person;

@@ -20,11 +20,9 @@ import static java.util.stream.Collectors.joining;
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResponseEntityExceptionHandler.class);
-
     @ResponseStatus
     @ExceptionHandler(value = {PersonException.class})
-    protected ResponseEntity<Object> personException(PersonException ex,
+    private ResponseEntity<Object> personException(PersonException ex,
                                                      WebRequest request) {
 
         return handleExceptionInternal(ex,
@@ -43,8 +41,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                     .stream()
                     .map(data -> "[".concat(data.getPropertyPath().toString()).concat(" : ")
                             .concat(data.getMessageTemplate()).concat("]")).collect(joining(", "));
-        } else if (ex.getCause() instanceof IllegalArgumentException) {
-            logger.error(ex.getCause().getMessage());
         }
 
         return new MessageDTO(message);

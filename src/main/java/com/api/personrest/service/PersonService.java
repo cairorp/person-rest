@@ -2,6 +2,7 @@ package com.api.personrest.service;
 
 import com.api.personrest.dto.PersonDTO;
 import com.api.personrest.model.Person;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface PersonService {
     ResponseEntity<Void> update(Integer id, PersonDTO personDTO);
 
     ResponseEntity<Void> delete(Integer id);
+
+    ResponseEntity<Page<Person>> findAll(Integer page, Integer size);
 }
