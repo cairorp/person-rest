@@ -8,6 +8,7 @@ import com.api.personrest.service.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -57,7 +58,7 @@ public class PersonServiceImpl implements PersonService {
             personRepository.save(person);
 
             return ResponseEntity.ok().build();
-        } catch (ConstraintViolationException | IllegalArgumentException ex) {
+        } catch (ConstraintViolationException | TransactionSystemException | IllegalArgumentException ex) {
             throw new PersonException("Erro ao atualizar dados de pessoa.");
         }
     }
@@ -69,7 +70,7 @@ public class PersonServiceImpl implements PersonService {
         try {
             personRepository.delete(Objects.requireNonNull(person));
 
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().build();
 
         } catch (IllegalArgumentException ex) {
             throw new PersonException("Não foi possivel deletar a pessoa de ID: " + id);
