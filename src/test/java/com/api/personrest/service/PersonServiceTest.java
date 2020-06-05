@@ -138,7 +138,7 @@ class PersonServiceTest {
         doNothing().when(personRepository).delete(person);
         personService = new PersonServiceImpl(personRepository);
 
-        assertEquals(ResponseEntity.noContent().build(), personService.delete(1));
+        assertEquals(ResponseEntity.ok().build(), personService.delete(1));
     }
 
     private Person mountPerson(String name, String document, Date birthDate) {
