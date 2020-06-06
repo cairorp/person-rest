@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(description = "Controller reponsavel por manter a entidade Pessoa.")
+@Api(description = "Controller reponsável por manter a entidade Pessoa.")
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
