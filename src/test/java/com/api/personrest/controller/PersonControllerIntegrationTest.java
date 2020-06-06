@@ -117,7 +117,7 @@ public class PersonControllerIntegrationTest {
                         "}"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().json("{\n" +
-                        "  \"message\": \"Erro ao atualizar dados de pessoa.[document : CPF inválido.]\"\n" +
+                        "  \"message\": \"Erro ao atualizar dados de pessoa. [document : CPF inválido.]\"\n" +
                         "}"));
     }
 
