@@ -3,7 +3,7 @@ Esse projeto é um CRUD referente a entidade pessoa que possui os seguintes camp
 
 ![](readme/endpoints.png)
 ### Pré-requisitos
-Você precisará de uma IDE (<b>Eclipse, intellij entre outras IDE's</b>) para a execução do projeto ou será necessário compila-lo para executar com (java -jar).
+Você precisará de uma IDE (<b>Eclipse, intellij ou outra IDE de sua preferência.</b>) para a execução do projeto ou será necessário compila-lo para executar com (java -jar).
 ### Instalação
 Para limpar e instalar o projeto será necessário executar o comando:
 > mvn clean install
