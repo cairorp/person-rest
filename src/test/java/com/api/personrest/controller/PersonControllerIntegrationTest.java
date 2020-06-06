@@ -115,7 +115,10 @@ public class PersonControllerIntegrationTest {
                         "\"document\" : \"12345678910\"," +
                         "\"birthDate\" : \"1995-12-15\"" +
                         "}"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().json("{\n" +
+                        "  \"message\": \"Erro ao atualizar dados de pessoa.[document : CPF inválido.]\"\n" +
+                        "}"));
     }
 
     @Test
