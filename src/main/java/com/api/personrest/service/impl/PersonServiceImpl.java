@@ -60,8 +60,8 @@ public class PersonServiceImpl implements PersonService {
             personRepository.save(person);
 
             return ResponseEntity.ok().build();
-        } catch (ConstraintViolationException | TransactionSystemException | IllegalArgumentException ex) {
-            throw new PersonException("Erro ao atualizar dados de pessoa.");
+        } catch (TransactionSystemException | IllegalArgumentException ex) {
+            throw new PersonException("Erro ao atualizar dados de pessoa.", ex);
         }
     }
 

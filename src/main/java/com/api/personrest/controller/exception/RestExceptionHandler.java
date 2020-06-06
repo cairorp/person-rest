@@ -5,6 +5,7 @@ import com.api.personrest.exception.PersonException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,7 +35,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String message = ex.getMessage();
 
         if (ex.getCause() instanceof ConstraintViolationException) {
-            message = message + ((ConstraintViolationException) ex.getCause())
+            message += " " + ((ConstraintViolationException) ex.getCause())
+                    .getConstraintViolations()
+                    .stream()
+                    .map(data -> "[".concat(data.getPropertyPath().toString()).concat(" : ")
+                            .concat(data.getMessageTemplate()).concat("]")).collect(joining(", "));
+        }else if(ex.getCause() instanceof TransactionSystemException
+                 && ex.getCause().getCause().getCause() instanceof ConstraintViolationException){
+            message += " " + ((ConstraintViolationException) ex.getCause().getCause().getCause())
                     .getConstraintViolations()
                     .stream()
                     .map(data -> "[".concat(data.getPropertyPath().toString()).concat(" : ")
