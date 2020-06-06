@@ -35,14 +35,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String message = ex.getMessage();
 
         if (ex.getCause() instanceof ConstraintViolationException) {
-            message += ((ConstraintViolationException) ex.getCause())
+            message += " " + ((ConstraintViolationException) ex.getCause())
                     .getConstraintViolations()
                     .stream()
                     .map(data -> "[".concat(data.getPropertyPath().toString()).concat(" : ")
                             .concat(data.getMessageTemplate()).concat("]")).collect(joining(", "));
         }else if(ex.getCause() instanceof TransactionSystemException
                  && ex.getCause().getCause().getCause() instanceof ConstraintViolationException){
-            message += ((ConstraintViolationException) ex.getCause().getCause().getCause())
+            message += " " + ((ConstraintViolationException) ex.getCause().getCause().getCause())
                     .getConstraintViolations()
                     .stream()
                     .map(data -> "[".concat(data.getPropertyPath().toString()).concat(" : ")
